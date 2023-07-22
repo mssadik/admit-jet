@@ -1,0 +1,16 @@
+.my-button {
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #4caf50; /* Green color for the button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Add hover effect to the button */
+  .my-button:hover {
+    background-color: #45a049; /* Darker green color on hover */
+  }

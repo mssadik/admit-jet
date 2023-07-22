@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Navbar.css'
 import { useState } from 'react';
 
@@ -12,14 +13,16 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <div className="md:text-2xl hidden md:block">
-                    Admit Jet
+                <div className="md:text-2xl hidden md:block py-2 px-4 text-white font-semibold">
+                    <a href="/" className=""> Admit Jet </a>
                 </div>
-                <div className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <a href="home">Home</a>
-                    <a href="/college">College</a>
-                    <a href="/admission">Admission</a>
-                    <a href="/myCollege">My College</a>
+                <div className={` navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
+                    <Link to="/" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="home">Home</Link>
+                    <Link to="/college" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/college">College</Link>
+                    <Link to="/admission" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/admission">Admission</Link>
+                    <Link to="/myCollege" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">My_College</Link>
+                    <Link to="/login" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">Login</Link>
+                    <Link to="/register" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">Register</Link>
                 </div>
                 <div className="navbar-search flex">
                     <input

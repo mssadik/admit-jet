@@ -1,0 +1,34 @@
+ [
+      {
+        "id": 1,
+        "name": "Example College 1",
+        "image": "https://i.ibb.co/C9CpngR/college1.jpg",
+        "rating": 4.5,
+        "admissionDate": "2023-09-01",
+        "researchHistory": "researchHistory 1",
+        "events": ["Event 1", "Event 2", "Event 3"],
+        "sports": ["Football", "Basketball", "Tennis"]
+      },
+      {
+        "id": 2,
+        "name": "Example College 2",
+        "image": "https://i.ibb.co/1KbHVTz/c2.jpg",
+        "rating": 4.2,
+        "admissionDate": "2023-10-15",
+        "researchHistory": "researchHistory 2",
+        "events": ["Event 4", "Event 5"],
+        "sports": ["Volleyball", "Swimming", "Soccer"]
+      },
+      {
+        "id": 3,
+        "name": "Example College 2",
+        "image": "https://i.ibb.co/1KbHVTz/c2.jpg",
+        "rating": 4.2,
+        "admissionDate": "2023-10-15",
+        "researchHistory": "researchHistory 3",
+        "events": ["Event 4", "Event 5"],
+        "sports": ["Volleyball", "Swimming", "Soccer"]
+      }
+]
+  
+  
