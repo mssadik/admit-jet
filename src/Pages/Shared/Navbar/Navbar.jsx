@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../../Providers/AuthProvider';
 
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const {logOut, user} = useContext(AuthContext);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+
+    const handelLogOut = () =>{
+        logOut()
+        .then(() =>{})
+        .catch(() =>{})
+    }
 
     return (
         <nav className="navbar">
@@ -23,6 +31,7 @@ const Navbar = () => {
                     <Link to="/myCollege" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">My_College</Link>
                     <Link to="/login" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">Login</Link>
                     <Link to="/register" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">Register</Link>
+                    {user && <Link to="" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege"><button onClick={handelLogOut}>Logout</button></Link>}
                 </div>
                 <div className="navbar-search flex">
                     <input
