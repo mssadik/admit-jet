@@ -1,0 +1,11 @@
+/* styles.css */
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-appear-active,
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}

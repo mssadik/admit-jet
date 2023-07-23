@@ -8,7 +8,7 @@ import { FaAngleRight } from 'react-icons/fa';
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const {logOut, user} = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
 
 
     const toggleMobileMenu = () => {
