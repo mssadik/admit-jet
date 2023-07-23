@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom';
 import './Navbar.css'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import { FaAngleRight } from 'react-icons/fa';
 
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const {logOut, user} = useContext(AuthContext);
+    console.log(user);
+
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -33,6 +36,7 @@ const Navbar = () => {
                     <Link to="/register" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege">Register</Link>
                     {user && <Link to="" className="block mt-2 text-sm font-medium text-gray-600 hover:text-blue-600 md:inline-block md:mt-0 hover:underline" href="/myCollege"><button onClick={handelLogOut}>Logout</button></Link>}
                 </div>
+               { user && <button ><Link className='flex items-center justify-center' to="/profile">{user && user.displayName}<FaAngleRight></FaAngleRight></Link></button>}
                 <div className="navbar-search flex">
                     <input
                         type="text"

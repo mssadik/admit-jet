@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext)
+    const { createUser } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
     const naviget = useNavigate()
 
-    const handelRegister = (event) =>{
+    const handelRegister = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -17,17 +17,30 @@ const Register = () => {
         const university = form.university.value;
         const address = form.address.value;
         createUser(email, password)
-        .then(result =>{
-            setSuccess("Account Created Successfully")
-            naviget('/')
-            const user = result.user;
-            console.log(user);
-            setError(" ")
-        })
-        .catch((e) => {
-            setSuccess('')
-            setError(e.message);
-        })
+            .then(() => {
+                const savedUser = {name, email, university, address}
+                fetch('http://localhost:5000/user',{
+                    method: "POST",
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(savedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            setSuccess("Account Created Successfully")
+                            
+                            setError(" ")
+                            naviget('/')
+                        }
+                    })
+
+            })
+            .catch((e) => {
+                setSuccess('')
+                setError(e.message);
+            })
 
         console.log(name, email, password, university, address);
     }
@@ -111,8 +124,8 @@ const Register = () => {
                 </form>
                 <div className="flex justify-between mt-4">
                     <p>Do not have an account <Link className="underline" to="/login">Login</Link></p><br />
-                    
-                    
+
+
                 </div>
             </div>
         </div>

@@ -1,56 +1,94 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const {signUser, googleSignIn} = useContext(AuthContext);
+    const { signUser, googleSignIn, resetPassword } = useContext(AuthContext);
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
+    const emailRef = useRef();
     const naviget = useNavigate()
 
-    const handelLogin = (event) =>{
+    const handelLogin = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         signUser(email, password)
-        .then(() =>{
-            setSuccess("User login Successfully")
-            setError('')
-            naviget('/')
-        })
-        .catch((e) => {
-            setSuccess("")
-            setError(e.message);
-        })
-        console.log( email, password);
+            .then(() => {
+                setSuccess("User login Successfully")
+                setError('')
+                naviget('/')
+            })
+            .catch((e) => {
+                setSuccess("")
+                setError(e.message);
+            })
+        // console.log(email, password);
     }
 
-    const handelGoogleLogin = () =>{
+    const handelGoogleLogin = () => {
         googleSignIn()
-        .then(() =>{
-            naviget('/')
-        })
-        .then(() =>{})
+            .then(() => {
+                naviget('/')
+            })
+            .then(() => { })
     }
 
-    
+    const handelResetPass = () => {
+        const email = emailRef.current.value
+        if (!email) {
+            Swal.fire({
+                title: 'Write Your Email Please',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+
+            })
+            return;
+        }
+
+        resetPassword(email)
+            .then(() => {
+                Swal.fire({
+                    title: 'Please check your email',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            })
+            .catch(e => {
+                console.log(e.message)
+            })
+
+
+
+    }
+
+
 
     return (
-        <div  style={{ backgroundImage: "url('https://i.ibb.co/2j9jmfC/f2.jpg')" }}>
+        <div style={{ backgroundImage: "url('https://i.ibb.co/2j9jmfC/f2.jpg')" }}>
             {/* <p className="text-2xl mx-40 py-20  bg-stone-600 pt-5 opacity-50 rounded-lg text-white">Study is the key that unlocks the door to knowledge and empowers us to explore,  the boundless realms of understanding,  propelling us towards our aspirations with an unwavering determination</p> */}
             <div className="min-h-screen  md:flex gap-10 items-center justify-center">
                 <div className="">
                     <button className="bg-black w-80 flex items-center justify-center p-4 rounded-lg">
-                        
-                            <FaGoogle size={24} />
-                         <span className="text-2xl ml-2 font-medium text-white font-serif">Continue with Github</span>
+
+                        <FaGoogle size={24} />
+                        <span className="text-2xl ml-2 font-medium text-white font-serif">Continue with Github</span>
                     </button>
                     <button onClick={handelGoogleLogin} className="bg-blue-900 w-80 flex items-center justify-center p-4 rounded-lg mt-3">
-                        
-                            <FaGithub size={24} />
+
+                        <FaGithub size={24} />
                         <span className="text-2xl ml-5 font-medium text-white font-serif">Continue with google</span>
                     </button>
                 </div>
@@ -62,6 +100,7 @@ const Login = () => {
                                 Email
                             </label>
                             <input
+                                ref={emailRef}
                                 type="email"
                                 id="email"
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
@@ -80,16 +119,16 @@ const Login = () => {
                             />
                         </div>
                         <div>
-                        <p className="text-xs text-red-600">{error}</p>
-                        <p className="text-xs text-green-500 mb-2">{success}</p>
+                            <p className="text-xs text-red-600">{error}</p>
+                            <p className="text-xs text-green-500 mb-2">{success}</p>
                             <button
                                 type="submit"
-                                className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                className="w-full hover:bg-blue-700 bg-indigo-500 text-white py-2 px-4 rounded-md  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
                             >
                                 Log In
                             </button>
-                            
-                            <button className="btn-link">Reset Password</button>
+
+                            <button onClick={handelResetPass} className="btn-link">Forget Password?</button>
                             <p>Do not have account <Link className="underline" to="/register">Register</Link></p>
                         </div>
                     </form>
