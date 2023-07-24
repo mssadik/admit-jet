@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from './../../../Providers/AuthProvider';
 
 const Profile = () => {
+    const {user} = useContext(AuthContext);
+    console.log(user?.email);
     const [profileData, setProfileData] = useState([]);
-    console.log(profileData);
+    // console.log(profileData);
     useEffect(() =>{
-        fetch('http://localhost:5000/user')
+        fetch(`https://admit-jet-server.vercel.app/user`)
         .then(res => res.json())
         .then(data => setProfileData(data))
     }, [])

@@ -19,7 +19,7 @@ const Register = () => {
         createUser(email, password)
             .then(() => {
                 const savedUser = {name, email, university, address}
-                fetch('http://localhost:5000/user',{
+                fetch('https://admit-jet-server.vercel.app/user',{
                     method: "POST",
                     headers:{
                         'content-type': 'application/json'
